@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="card-block">
+        <form id="form-create" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="roadname">Road name</label>
+                <input data-validate="required" type="text" class="form-control" id="roadname" name="roadname">
+            </div>
+            <div class="form-group">
+                <label for="roadnumber">Road number</label>
+                <input data-validate="integer" type="text" class="form-control" id="roadnumber" name="roadnumber">
+            </div>
+            <div class="form-group">
+                <label for="door">Door</label>
+                <input data-validate="required" type="text" class="form-control" id="door" name="door">
+            </div>
+            <div class="form-group">
+                <label for="municipality">Municipality</label>
+                <input data-validate="required" type="text" class="form-control" id="municipality" name="municipality">
+            </div>
+            <div class="form-group">
+                <label for="postalcode">Postal code</label>
+                <input data-validate="postal" type="text" class="form-control" id="postalcode" name="postalcode">
+            </div>
+            <div class="form-group">
+                <label for="file-1">Image 1</label>
+                <input id="file-1" type="file" class="form-control-file" name="file-1">
+                <small class="form-text text-muted">Select atleast 3 images.</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
