@@ -96,7 +96,7 @@ RouteHandlers.prototype = {
 
     loadUsers: function () {
         jQuery.ajax({
-            url: '/app/users',
+            url: 'http://api.propertyagent.local/users/',
             method: 'GET',
             dataType: 'json',
             statusCode: {
@@ -157,7 +157,7 @@ RouteHandlers.prototype = {
                 var formData = new FormData(this);
 
                 jQuery.ajax({
-                    url: '/app/properties',
+                    url: '//api.propertyagent.local/properties/',
                     cache: false,
                     processData: false,
                     contentType: false,
@@ -194,7 +194,7 @@ RouteHandlers.prototype = {
         }
 
         jQuery.ajax({
-            url: '/app/properties',
+            url: '//api.propertyagent.local/properties/p/1',
             method: 'GET',
             dataType: 'json'
         })
@@ -203,8 +203,11 @@ RouteHandlers.prototype = {
                 var row = $('<div></div>', {
                     'class': 'row'
                 });
+                console.log(data);
 
-                for (var id in data) {
+                for (var index in data.properties) {
+                    var property = data.properties[index];
+
                     var col = $('<div></div>', {
                         'class': 'col-xs-12 col-lg-6 mb-4'
                     });
@@ -214,7 +217,7 @@ RouteHandlers.prototype = {
                     })
                     .append(
                         $('<img>', {
-                            'src': data[id].images[0],
+                            'src': property.images[0],
                             'class': 'card-img-top'
                         })
                     );
@@ -224,8 +227,8 @@ RouteHandlers.prototype = {
                     });
 
                     cardBlock.html(
-                        '<p>' + data[id].roadname + ' ' + data[id].roadnumber + ' ' + data[id].door + ', ' + data[id].postalcode + ' ' + data[id].municipality + '</p>' +
-                        '<iframe src="' + data[id].map + '" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>'
+                        '<p>' + property.road + ' ' + property.number + ' ' + property.door + ', ' + property.postal + ' ' + property.municipality + '</p>' +
+                        '<iframe src="' + property.map + '" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>'
                     );
 
                     if (verified) {

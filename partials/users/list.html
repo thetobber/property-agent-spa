@@ -1,0 +1,31 @@
+<div id="users"></div>
+
+<script>
+    (function ($) {
+        $users = $('#users');
+
+        $.ajax({
+            url: '//api.propertyagent.local/users/p/1',
+            method: 'GET',
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: true
+            }
+        })
+        .done(function (data) {
+            var markup = '';
+
+            for (var index in data.users) {
+                var user = data.users[index];
+
+                markup += `
+                <div>${user.username}</div>
+                <div>${user.email}</div>
+                `;
+
+            }
+            
+            $users.append(markup);
+        });
+    })(jQuery);
+</script>

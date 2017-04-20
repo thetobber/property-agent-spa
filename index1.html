@@ -20,19 +20,19 @@
             <div class="collapse navbar-collapse" id="navbar">
                 <ul id="navlinks" class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/" data-navigate>Home</a>
+                        <a class="nav-link" href="/" data-navigo>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/properties" data-navigate>Properties</a>
+                        <a class="nav-link" href="/properties" data-navigo>Properties</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/users" data-navigate>Users</a>
+                        <a class="nav-link" href="/users" data-navigo>Users</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-sm-0">
-                    <button id="sign-out-button" type="button" class="btn btn-outline-danger mr-2" >Sign out</button>
-                    <a id="sign-in-button" class="btn btn-outline-primary mr-2" href="/signin" data-navigate>Sign in</a>
-                    <a id="register-button" class="btn btn-outline-primary" href="/register" data-navigate>Register</a>
+                    <button id="signout-btn" class="btn btn-outline-primary mr-2 hidden" type="button">Sign out</button id="signout-btn">
+                    <a id="signin-btn" class="btn btn-outline-primary mr-2" href="/signin" data-navigo>Sign in</a>
+                    <a id="register-btn" class="btn btn-outline-primary" href="/register" data-navigo>Register</a>
                 </form>
             </div>
         </nav>
@@ -43,27 +43,13 @@
 
     <!-- Scripts -->
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/navigo.min.js"></script>
     <script src="/js/tether.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/navigo.min.js"></script>
-
-    <script>
-        var Properties = {};
-        var Users = {};
-        var Dashboard = {};
-        var Validator = {};
-        var Authentication = {
-            user: undefined,
-            scopes: undefined
-        };
-    </script>
-
-    <script src="/js/authentication.js"></script>
     <script src="/js/validator.js"></script>
-    <script src="/js/properties.list.js"></script>
-    <script src="/js/properties.single.js"></script>
-    <script src="/js/properties.create.js"></script>
-    <script src="/js/dashboard.signin.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/notifier.js"></script>
+    <script src="/js/handlers.js"></script>
     <script src="/js/routes.js"></script>
 </body>
 
