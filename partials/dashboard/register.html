@@ -1,9 +1,9 @@
 <div class="card">
     <div class="card-block">
-        <form id="form-register">
+        <form id="form">
             <div class="form-group">
-                <label for="name">Name</label>
-                <input data-validate="required" type="text" class="form-control" id="name" name="name">
+                <label for="username">Username</label>
+                <input data-validate="required" minlength="4" type="text" class="form-control" id="username" name="username">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
@@ -11,7 +11,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input data-validate="required" type="password" class="form-control" id="password" name="password">
+                <input data-validate="required" minlength="6" type="password" class="form-control" id="password" name="password">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

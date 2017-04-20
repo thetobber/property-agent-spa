@@ -1,31 +1,35 @@
-function Notifier () {
-    this.sound = new Audio('/sounds/arpeggio.mp3');
-}
-Notifier.prototype = {
-    send: function (title, text, documentTitle) {
-        text = text || '';
-        documentTitle = documentTitle || false;
+Notifier.send = function (title, text) {
+    text = text || '';
 
-        if (this.hasPermission()) {
-            this.sound.play();
-            new Notification(title, {
-                body: text
-            });
-        }
-    },
-    hasPermission: function () {
-        if (Notification.permission === 'granted') {
-            return true;
-        }
-        
-        else if (Notification.permission !== 'denied') {
-            Notification.requestPermission(function (permission) {
-                if (permission === "granted") {
-                    return true;
-                }
-            });
-        }
+    var oldTitle = document.title;
+    document.title = title;
 
-        return false;
-    },
+    setTimeout(function () {
+        if (document.title == title) {
+            document.title = oldTitle;
+        }
+    }, 4000);
+
+    if (this.hasPermission()) {
+        this.sound.play();
+        new Notification(title, {
+            body: text
+        });
+    }
+};
+
+Notifier.hasPermission = function () {
+    if (Notification.permission === 'granted') {
+        return true;
+    }
+    
+    else if (Notification.permission !== 'denied') {
+        Notification.requestPermission(function (permission) {
+            if (permission === "granted") {
+                return true;
+            }
+        });
+    }
+
+    return false;
 };

@@ -1,18 +1,7 @@
-Properties.list = function () {
+Properties.list = function (canEdit) {
     var $properties = $('#properties');
     var $pagination = $('#pagination');
     var currentPage = 1;
-    var canEdit = false;
-
-    Authentication
-    .hasScopes({
-        realtor: true,
-        admin: true,
-        superadmin: true
-    })
-    .then(function () {
-        canEdit = true;
-    });
 
     $(document).on('click', '[data-page]', function (e) {
         var attr = e.target.getAttribute('data-page');
@@ -35,12 +24,13 @@ Properties.list = function () {
 
         for (var index in data.properties) {
             var property = data.properties[index];
+            var image = typeof property.images[0] == 'undefined' ? '/img/default.png' : property.images[0];
 
             markup += getPropertyMarkup(
                 property.id,
                 property.type,
                 property.municipality,
-                property.images[0],
+                image,
                 property.road,
                 property.number,
                 property.floor,
@@ -76,12 +66,13 @@ Properties.list = function () {
 
             for (var index in data.properties) {
                 var property = data.properties[index];
+                var image = typeof property.images[0] == 'undefined' ? '/img/default.png' : property.images[0];
 
                 markup += getPropertyMarkup(
                     property.id,
                     property.type,
                     property.municipality,
-                    property.images[0],
+                    image,
                     property.road,
                     property.number,
                     property.floor,
@@ -103,7 +94,7 @@ Properties.list = function () {
             <div class="card">
                 <div class="card-header">${type} - ${municipality}</div>
 
-                <img src="${image}" class="card-img-top"></img>
+                <div class="background-cover pad-70" style="background-image: url(${image})"></div>
 
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">${type}</li>
@@ -113,8 +104,7 @@ Properties.list = function () {
 
                 <div class="card-block">
                     <a href="/properties/${id}" class="btn btn-primary" data-navigate>View</a>
-                    ${canEdit ? `<a href="/properties/edit/${id}" class="btn btn-warning" data-navigate>Edit</a>` : ''}
-                    ${canEdit ? `<a href="/properties/delete/${id}" class="btn btn-danger" data-navigate>Delete</a>` : ''}
+                    ${canEdit ? `<a href="/properties/update/${id}" class="btn btn-warning" data-navigate>Edit</a>` : ''}
                 </div>
             </div>
         </div>

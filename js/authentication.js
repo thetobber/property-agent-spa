@@ -5,8 +5,6 @@ is here primarily for illustrative pruposes.
 
 //Attempts to sign in user and return a promise
 Authentication.signIn = function (formData) {
-    var self = this;
-
     return jQuery.ajax({
         url: '//api.propertyagent.local/auth/signin/',
         data: formData,
@@ -18,9 +16,6 @@ Authentication.signIn = function (formData) {
         }
     })
     .then(function (data) {
-        self.username = data.username;
-        self.scopes = data.scopes;
-
         window.Controls.signInButton.addClass('hidden');
         window.Controls.signOutButton.removeClass('hidden');
         window.Controls.registerButton.addClass('hidden');
@@ -28,28 +23,22 @@ Authentication.signIn = function (formData) {
 };
 
 //Attempts to sign out user, always clear stored data and returns a promise
-Authentication.signOut = function (formData) {
-    var self = this;
-
+Authentication.signOut = function () {
     return jQuery.ajax({
         url: '//api.propertyagent.local/auth/signout/',
-        method: 'POST',
+        method: 'GET',
         dataType: 'text'
     })
     .always(function (data) {
-        self.username = undefined;
-        self.scopes = undefined;
-
         window.Controls.signInButton.removeClass('hidden');
         window.Controls.signOutButton.addClass('hidden');
         window.Controls.registerButton.removeClass('hidden');
+        //window.location.href = '/';
     });
 };
 
 //Attempts to register a new user and returns a promise
 Authentication.register = function (formData) {
-    var self = this;
-
     return jQuery.ajax({
         url: '//api.propertyagent.local/users/',
         data: formData,
@@ -60,13 +49,10 @@ Authentication.register = function (formData) {
 };
 
 Authentication.hasScopes = function (scopes) {
-    var query = jQuery.param(scopes);
-
     return jQuery.ajax({
         url: '//api.propertyagent.local/auth/scopes/',
-        data: query,
+        data: jQuery.param(scopes),
         method: 'POST',
-        dataType: 'json',
         contentType: 'application/x-www-form-urlencoded',
         xhrFields: {
             withCredentials: true

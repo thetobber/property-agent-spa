@@ -1,42 +1,44 @@
 Properties.create = function (id) {
     var $form = $('#form');
+    var $imageGroup = $form.find('#image-group');
 
     var self = this;
     var inputs = [];
-    var inputIndex = 2;
+    var inputIndex = 1;
 
     function createFileInput() {
         var name = 'file-' + inputIndex;
         var element = $('<div></div>', {
-            'class': 'form-group'
+            'class': 'form-group d-flex'
         })
-        .append($('<label></label>', {
-            'for': name,
-            'text': 'Image ' + inputIndex
-        }))
-        .append($('<input>', {
-            'id': name,
-            'type': 'file',
-            'name': name,
-            'class': 'form-control-file'
-        }))
-        .on('change', function () {
-            var input = createFileInput();
-            $form.find(':last').before(input);
-            inputIndex++;
-        });
+        .append(
+            $('<button></button>', {
+                'class': 'btn btn-danger btn-sm mr-2',
+                type: 'button',
+                text: 'Remove',
+                click: function () {
+                    element.remove();
+                }
+            })
+        )
+        .append(
+            $('<input>', {
+                'id': name,
+                'type': 'file',
+                'name': name,
+                'class': 'form-control-file'
+            })
+        );
 
         inputs.push(element);
 
-        return element;
+        inputIndex++;
+
+        $imageGroup.append(element);
     }
 
-    $form.find('#file-1').on('change', function () {
-        var name = 'file-' + inputIndex;
-        var input = createFileInput();
-
-        $form.find(':last').before(input);
-        inputIndex++;
+    $('#add-image').on('click', function () {
+        createFileInput();
     });
 
     $form.on('submit', function (e) {
@@ -53,15 +55,19 @@ Properties.create = function (id) {
                 data: formData,
                 method: 'POST',
                 dataType: 'text',
-                success: function (data) {
-                    $form[0].reset();
-
-                    for (var i = 0; i < inputs.length; i++) {
-                        inputs[i].remove();
-                    }
-
-                    inputs = [];
+                xhrFields: {
+                    withCredentials: true
                 }
+            })
+            .done(function (data) {
+                $form[0].reset();
+
+                for (var i = 0; i < inputs.length; i++) {
+                    inputs[i].remove();
+                }
+
+                inputs = [];
+                inputIndex = 1;
             });
         }
 

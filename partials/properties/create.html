@@ -23,7 +23,7 @@
 
             <div class="form-group">
                 <label for="door">Door</label>
-                <input data-validate="required integer" type="text" class="form-control" id="door" name="door">
+                <input data-validate="required" type="text" class="form-control" id="door" name="door">
             </div>
 
             <div class="form-group">
@@ -67,10 +67,10 @@
             </div>
 
             <div class="form-group">
-                <label for="file-1">Image 1</label>
-                <input id="file-1" type="file" class="form-control-file" name="file-1">
-                <small class="form-text text-muted">Select one or more images.</small>
+                <button id="add-image" type="button" class="btn btn-primary">Add image</button>
             </div>
+
+            <div id="image-group"></div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
